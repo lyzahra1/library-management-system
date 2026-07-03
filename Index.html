@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <?!= include('css'); ?>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="logo"><span>Perpustakaan</span>Online</div>
+</header>
+
+<!-- MODAL PINJAM -->
+<div id="pinjamModal" class="modal-overlay" style="display:none;">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Peminjaman Buku</h2>
+      <button class="modal-close" onclick="closePinjamModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="pinjamBookId">
+      <input id="nama"   placeholder="Nama Lengkap">
+      <input id="divisi" placeholder="Divisi">
+      <input id="hp"     placeholder="No HP">
+      <input id="email"  placeholder="Email" type="email">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closePinjamModal()">Batal</button>
+      <button class="btn btn-success" onclick="submitPinjam()">Pinjam Buku</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL KEMBALI -->
+<div id="kembaliModal" class="modal-overlay" style="display:none;">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Pengembalian Buku</h2>
+      <button class="modal-close" onclick="closeKembaliModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input id="idPinjam"     placeholder="ID Peminjaman">
+      <input id="emailKembali" placeholder="Email" type="email">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeKembaliModal()">Batal</button>
+      <button class="btn btn-primary" onclick="submitKembali()">Kembalikan</button>
+    </div>
+  </div>
+</div>
+
+<!-- KONTEN -->
+<div class="astra-container">
+
+  <h1 class="page-title">Sistem Perpustakaan</h1>
+  <p class="page-subtitle">Kelola peminjaman dan pengembalian buku</p>
+
+  <!-- Ganti bagian card-grid -->
+<div class="card-grid">
+  <div class="card card-blue">
+    <h3>Total Koleksi</h3>
+    <p id="totalBuku">0</p>
+  </div>
+  <div class="card card-red">
+    <h3>Dipinjam</h3>  <!-- lebih ringkas di mobile -->
+    <p id="dipinjam">0</p>
+  </div>
+  <div class="card card-green">
+    <h3>Tersedia</h3>
+    <p id="tersedia">0</p>
+  </div>
+</div>
+
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input id="search" class="search-input" type="text" placeholder="Cari judul, penulis, atau ID buku...">
+    </div>
+    <button class="btn btn-primary" onclick="openKembaliModal()">
+      🔄 Pengembalian Buku
+    </button>
+  </div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Judul Buku</th>
+          <th>Penulis</th>
+          <th>Kategori</th>
+          <th>Stok</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="bookTable"></tbody>
+    </table>
+    <div id="pagination"></div>
+  </div>
+
+</div>
+
+<?!= include('js'); ?>
+</body>
+</html>
